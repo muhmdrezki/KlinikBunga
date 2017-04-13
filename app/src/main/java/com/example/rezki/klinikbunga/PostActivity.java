@@ -13,7 +13,7 @@ import com.google.android.gms.common.images.ImageManager;
 public class PostActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton imageselect;
-    private static final int GALLERY_REQUEST = -1;
+    private static final int GALLERY_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
