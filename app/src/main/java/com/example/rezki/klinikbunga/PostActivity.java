@@ -36,7 +36,6 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK)
-
         {
             Uri imageUri = data.getData();
             imageselect.setImageURI(imageUri);
