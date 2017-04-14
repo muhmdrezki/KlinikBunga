@@ -12,42 +12,43 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/imageselect"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@mipmap/ic_add_a_photo_black_48dp"
-        />
+        <ImageButton
+            android:id="@+id/imageselect"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:srcCompat="@mipmap/add_btn" />
 
-    <EditText
-        android:id="@+id/idpost"
-        android:layout_width="325dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/input_outline"
-        android:hint="Post Title"
-        android:singleLine="true"
-        android:padding="10dp"
-        android:layout_weight="0.00" />
+        <EditText
+            android:id="@+id/posttitle"
+            android:layout_width="325dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_weight="0.00"
+            android:background="@drawable/input_outline"
+            android:hint="Post Title"
+            android:padding="10dp" />
 
-    <EditText
-        android:layout_width="325dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:id="@+id/iddesc"
-        android:hint="Post Description"
-        android:background="@drawable/input_outline"
-        android:inputType="textMultiLine"
-        android:padding="10dp"
-        android:layout_weight="0.00"
-        />
+        <EditText
+            android:id="@+id/postdesc"
+            android:layout_width="325dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_weight="0.00"
+            android:background="@drawable/input_outline"
+            android:hint="Post Description"
+            android:inputType="textMultiLine"
+            android:padding="10dp" />
 
-</LinearLayout>
+    </LinearLayout>
 
 <Button
+    android:id="@+id/buttonsubmit"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:layout_marginTop="30dp"
