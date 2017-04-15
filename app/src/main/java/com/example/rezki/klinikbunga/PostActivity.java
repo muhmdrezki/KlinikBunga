@@ -1,8 +1,11 @@
 package com.example.rezki.klinikbunga;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -26,12 +31,12 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonsubmit;
     private ImageButton imageselect;
 
-    private Uri imageURI = null;
-
+    private Uri imageURI;
 
     private static final int GALLERY_REQUEST = 1;
     private StorageReference storage;
     private ProgressDialog progressdialog;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         //Tampung ID di Variable
         storage = FirebaseStorage.getInstance().getReference();
         progressdialog = new ProgressDialog(this);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
 
         imageselect     = (ImageButton) findViewById(R.id.imageselect);
         posttitle       = (EditText) findViewById(R.id.posttitle);
@@ -56,8 +62,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     //Fungsi Posting
     private void StartPosting() {
         //Deklarasi Variable
-        String judul = posttitle.getText().toString().trim();
-        String deskripsi = postdesc.getText().toString().trim();
+        final String judul = posttitle.getText().toString().trim();
+        final String deskripsi = postdesc.getText().toString().trim();
 
         //Menampilkan Progress Bar
         progressdialog.setMessage("Posting, Please Wait");
@@ -67,12 +73,18 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         if(!TextUtils.isEmpty(judul) && !TextUtils.isEmpty(deskripsi) && imageURI != null){
         //Proses Upload
             StorageReference filepath = storage.child("Blog_Images").child(imageURI.getLastPathSegment());
-
             filepath.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    //Database Push
+                    DatabaseReference newPost = databaseReference.push();
+                                newPost.child("title").setValue(judul);
+                                newPost.child("description").setValue(deskripsi);
+                                newPost.child("image").setValue(downloadUrl).toString();
+
                     progressdialog.dismiss();
+                    startActivity(new Intent(PostActivity.this, MainActivity.class));
                 }
             });
         }
@@ -95,8 +107,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK)
         {
-            Uri imageUri = data.getData();
-            imageselect.setImageURI(imageUri);
+            imageURI = data.getData();
+            imageselect.setImageURI(imageURI);
         }
     }
 }
