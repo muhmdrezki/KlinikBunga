@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -85,9 +86,15 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
                     progressdialog.dismiss();
                     startActivity(new Intent(PostActivity.this, MainActivity.class));
+
                 }
             });
+        }else{
+            progressdialog.dismiss();
+            Toast.makeText(this, "Upload Failed",Toast.LENGTH_LONG).show();
+
         }
+        Toast.makeText(this, "uplod Succes", Toast.LENGTH_LONG).show();
     }
 
     @Override
