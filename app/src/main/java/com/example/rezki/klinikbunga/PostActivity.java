@@ -80,9 +80,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     //Database Push
                     DatabaseReference newPost = databaseReference.push();
-                                newPost.child("title").setValue(judul);
-                                newPost.child("description").setValue(deskripsi);
-                                newPost.child("image").setValue(downloadUrl).toString();
+                                newPost.child("title").setValue(judul).toString();
+                                newPost.child("description").setValue(deskripsi).toString();
+                                newPost.child("image").setValue(downloadUrl.toString());
 
                     progressdialog.dismiss();
                     startActivity(new Intent(PostActivity.this, MainActivity.class));

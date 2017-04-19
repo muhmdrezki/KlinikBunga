@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.rezki.klinikbunga.LoginActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="KLINIK BUNGA"
+        android:textAlignment="center"
+        android:fontFamily="casual"
+        android:textSize="35dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Express Your Feeling With Flowers"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="casual"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SIGN IN"
+        android:fontFamily="casual"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_marginTop="40dp"
+        />
+
+    <EditText
+        android:id="@+id/etemail"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:fontFamily="casual"/>
+
+    <EditText
+        android:id="@+id/etpassword"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:fontFamily="casual"
+        />
+
+    <Button
+        android:id="@+id/btnsignin"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="SIGN IN"
+        android:fontFamily="casual"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/registerlink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Don't Have An Account? Sign Up Here!"
+        android:fontFamily="casual"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"/>
+</LinearLayout>
