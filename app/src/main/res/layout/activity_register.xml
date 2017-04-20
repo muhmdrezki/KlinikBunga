@@ -38,17 +38,6 @@
             />
 
         <EditText
-            android:id="@+id/etname"
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            android:fontFamily="casual"
-            />
-
-        <EditText
             android:id="@+id/etemail"
             android:layout_width="325dp"
             android:layout_height="wrap_content"

@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                     Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
+
+                } else if (firebaseAuth.getCurrentUser()!=null){
+                    check_userexist();
                 }
             }
         };
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         postlist.setHasFixedSize(true);
         postlist.setLayoutManager(new LinearLayoutManager(this));
 
-        check_userexist();
+        //check_userexist();
 
     }
 
@@ -89,17 +92,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void check_userexist(){
         final String userid = firebaseauth.getCurrentUser().getUid();
-
+        db_login = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseauth.getCurrentUser().getUid()).child("image");
+        final String image = db_login.toString().trim();
         db_login.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (!dataSnapshot.hasChild(userid)){
+                if (!dataSnapshot.hasChild(userid) && image=="Default"){
 
                     Intent mainIntent = new Intent(MainActivity.this, ProfileActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(mainIntent);
-
                 }
 
             }
@@ -154,11 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
                 logout();
 
-        } else if (item.getItemId() == R.id.seeprofile){
-
-                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
 

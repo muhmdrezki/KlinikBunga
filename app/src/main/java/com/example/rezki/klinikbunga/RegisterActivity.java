@@ -24,7 +24,7 @@ import org.w3c.dom.Text;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText etemail, etpassword, etname;
+    private EditText etemail, etpassword;
     private Button btnsignup;
     private TextView signinlink;
 
@@ -46,12 +46,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         etemail = (EditText) findViewById(R.id.etemail);
         etpassword = (EditText) findViewById(R.id.etpassword);
-        etname = (EditText) findViewById(R.id.etname);
         signinlink = (TextView) findViewById(R.id.signinlink);
 
         btnsignup = (Button) findViewById(R.id.btnsignup);
 
         btnsignup.setOnClickListener(this);
+        signinlink.setOnClickListener(this);
     }
 
     @Override
@@ -64,11 +64,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void startRegister() {
-        final String name = etname.getText().toString().trim();
         String email = etemail.getText().toString().trim();
         String password = etpassword.getText().toString().trim();
 
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
+        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
 
                 progressdialog.show();
                 progressdialog.setMessage("Please Wait, Signing Up..");
@@ -82,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             String userid = auth.getCurrentUser().getUid();
 
                             DatabaseReference current_user  = databasereference.child(userid);
-                            current_user.child("Name").setValue(name);
                             current_user.child("image").setValue("Default");
 
                             progressdialog.dismiss();

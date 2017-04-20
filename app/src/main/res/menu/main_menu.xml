@@ -9,9 +9,6 @@
         <item android:id="@+id/action_settings"
               android:title="Settings"
               app:showAsAction="never" />
-        <item android:id="@+id/seeprofile"
-            android:title="My Profile"
-            app:showAsAction="never" />
         <item android:id="@+id/logout"
               android:title="Log Out"
               app:showAsAction="never" />
