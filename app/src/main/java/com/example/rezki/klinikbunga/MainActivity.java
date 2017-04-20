@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
 
+                viewHolder.setUsername(String.valueOf(model.getUsername()));
                 viewHolder.setTitle(String.valueOf(model.getTitle()));
                 viewHolder.setDesc(String.valueOf(model.getDescription()));
                 viewHolder.setImage(getApplicationContext(),model.getImage());
@@ -120,6 +123,11 @@ public class MainActivity extends AppCompatActivity {
         public PostViewHolder(View itemView){
             super(itemView);
             view = itemView;
+        }
+
+        public void setUsername(String username){
+            TextView tvauthor = (TextView) view.findViewById(R.id.tvauthor);
+            tvauthor.setText("Posted By " + username);
         }
 
         public void setTitle(String title){

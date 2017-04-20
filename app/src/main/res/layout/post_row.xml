@@ -15,19 +15,30 @@
             android:src="@mipmap/add_btn" />
 
         <TextView
+            android:id="@+id/tvauthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Post Author"
+            android:fontFamily="casual"
+            android:padding="7dp"
+            />
+
+        <TextView
             android:id="@+id/titlepost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="7dp"
             android:text="Your Post Title Here"
             android:textSize="15dp"
+            android:fontFamily="casual"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/descpost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="9dp"
+            android:padding="7dp"
+            android:fontFamily="casual"
             android:text="Your Description Here"
             android:textSize="13dp" />
 

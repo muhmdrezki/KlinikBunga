@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,9 +16,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,6 +46,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     private StorageReference storage;
     private ProgressDialog progressdialog;
     private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+    private DatabaseReference user_db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +60,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         storage = FirebaseStorage.getInstance().getReference();
         progressdialog = new ProgressDialog(this);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
 
         imageselect     = (ImageButton) findViewById(R.id.imageselect);
         posttitle       = (EditText) findViewById(R.id.posttitle);
@@ -66,35 +81,53 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         final String judul = posttitle.getText().toString().trim();
         final String deskripsi = postdesc.getText().toString().trim();
 
-        //Menampilkan Progress Bar
-        progressdialog.setMessage("Posting, Please Wait");
-        progressdialog.show();
-
         //Title, Deskripsi, Gambar gabisa kosong
         if(!TextUtils.isEmpty(judul) && !TextUtils.isEmpty(deskripsi) && imageURI != null){
         //Proses Upload
+            //Menampilkan Progress Bar
+            progressdialog.setMessage("Posting, Please Wait");
+            progressdialog.show();
             StorageReference filepath = storage.child("Blog_Images").child(imageURI.getLastPathSegment());
             filepath.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    final Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     //Database Push
-                    DatabaseReference newPost = databaseReference.push();
-                                newPost.child("title").setValue(judul).toString();
-                                newPost.child("description").setValue(deskripsi).toString();
-                                newPost.child("image").setValue(downloadUrl.toString());
+                    final DatabaseReference newPost = databaseReference.push();
 
-                    progressdialog.dismiss();
-                    startActivity(new Intent(PostActivity.this, MainActivity.class));
+                     user_db.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(DataSnapshot dataSnapshot) {
 
+
+                             newPost.child("title").setValue(judul);
+                             newPost.child("description").setValue(deskripsi);
+                             newPost.child("image").setValue(downloadUrl.toString());
+                             newPost.child("uid").setValue(user.getUid());
+                             newPost.child("username").setValue(dataSnapshot.child("name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                 @Override
+                                 public void onComplete(@NonNull Task<Void> task) {
+                                     if(task.isSuccessful()){
+                                            progressdialog.dismiss();
+                                            startActivity(new Intent(PostActivity.this, MainActivity.class));
+                                     }
+                                 }
+                             });
+
+                         }
+
+                         @Override
+                         public void onCancelled(DatabaseError databaseError) {
+
+                         }
+                     });
                 }
             });
         }else{
             progressdialog.dismiss();
-            Toast.makeText(this, "Upload Failed",Toast.LENGTH_LONG).show();
-
+            Toast.makeText(this, "Error",Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(this, "uplod Succes", Toast.LENGTH_LONG).show();
+
     }
 
     @Override

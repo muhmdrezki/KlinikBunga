@@ -7,16 +7,25 @@ package com.example.rezki.klinikbunga;
 public class Post {
 
 
-    private String title, description, image;
+    private String title, description, image, username;
 
     public Post(){
 
     }
 
-    public Post(String title, String description, String image) {
+    public Post(String title, String description, String image, String username) {
         this.title = title;
         this.description = description;
         this.image = image;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getTitle() {
