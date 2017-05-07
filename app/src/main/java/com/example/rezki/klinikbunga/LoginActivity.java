@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 if (dataSnapshot.hasChild(userid)){
 
-                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent mainIntent = new Intent(LoginActivity.this, MainMenu.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(mainIntent);
 

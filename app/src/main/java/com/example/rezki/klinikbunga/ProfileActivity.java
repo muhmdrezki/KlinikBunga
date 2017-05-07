@@ -108,7 +108,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                         progressdialog.dismiss();
 
-                        Intent mainIntent = new Intent(ProfileActivity.this, MainActivity.class);
+                        Intent mainIntent = new Intent(ProfileActivity.this, MainMenu.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mainIntent);
 

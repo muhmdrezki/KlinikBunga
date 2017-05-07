@@ -14,24 +14,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView postlist;
     private DatabaseReference databaseReference;
-    private DatabaseReference db_login;
     private FirebaseAuth firebaseauth;
     private FirebaseAuth.AuthStateListener authlistener;
 
@@ -40,111 +34,71 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Cek apakah user sudah login atau belum
-        firebaseauth = FirebaseAuth.getInstance();
-        authlistener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser()==null){
-
-                    Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
-
-                } else if (firebaseAuth.getCurrentUser()!=null){
-                    check_userexist();
-                }
-            }
-        };
-
-
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
         databaseReference.keepSynced(true);
-        db_login = FirebaseDatabase.getInstance().getReference().child("Users");
-        db_login.keepSynced(true);
 
         postlist = (RecyclerView) findViewById(R.id.postlist);
         postlist.setHasFixedSize(true);
         postlist.setLayoutManager(new LinearLayoutManager(this));
 
-        //check_userexist();
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-        firebaseauth.addAuthStateListener(authlistener);
-        FirebaseRecyclerAdapter<Post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
-
-            Post.class,R.layout.post_row,PostViewHolder.class,databaseReference
-        )   {
+        firebaseauth = FirebaseAuth.getInstance();
+        authlistener = new FirebaseAuth.AuthStateListener() {
             @Override
-            protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseRecyclerAdapter<Post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
 
-                viewHolder.setUsername(String.valueOf(model.getUsername()));
-                viewHolder.setTitle(String.valueOf(model.getTitle()));
-                viewHolder.setDesc(String.valueOf(model.getDescription()));
-                viewHolder.setImage(getApplicationContext(),model.getImage());
+                        Post.class, R.layout.post_row, PostViewHolder.class, databaseReference
+                ) {
+                    @Override
+                    protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
+
+                        viewHolder.setUsername(String.valueOf(model.getUsername()));
+                        viewHolder.setTitle(String.valueOf(model.getTitle()));
+                        viewHolder.setDesc(String.valueOf(model.getDescription()));
+                        viewHolder.setImage(getApplicationContext(), model.getImage());
+                    }
+                };
+                postlist.setAdapter(firebaseRecyclerAdapter);
             }
         };
-            postlist.setAdapter(firebaseRecyclerAdapter);
     }
 
-    private void check_userexist(){
-        final String userid = firebaseauth.getCurrentUser().getUid();
-        db_login = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseauth.getCurrentUser().getUid()).child("image");
-        final String image = db_login.toString().trim();
-        db_login.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if (!dataSnapshot.hasChild(userid) && image=="Default"){
-
-                    Intent mainIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(mainIntent);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+  @Override
+    protected void onStart() {
+        super.onStart();
+       firebaseauth.addAuthStateListener(authlistener);
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         View view;
 
-        public PostViewHolder(View itemView){
+        public PostViewHolder(View itemView) {
             super(itemView);
             view = itemView;
         }
 
-        public void setUsername(String username){
+        public void setUsername(String username) {
             TextView tvauthor = (TextView) view.findViewById(R.id.tvauthor);
             tvauthor.setText("Posted By " + username);
         }
 
-        public void setTitle(String title){
+        public void setTitle(String title) {
             TextView titlepost = (TextView) view.findViewById(R.id.titlepost);
             titlepost.setText(title);
         }
 
-        public void setDesc(String description){
+        public void setDesc(String description) {
             TextView descpost = (TextView) view.findViewById(R.id.descpost);
             descpost.setText(description);
         }
 
-        public void setImage(Context ctx, String image){
-           ImageView postimage = (ImageView) view.findViewById(R.id.postimage);
+        public void setImage(Context ctx, String image) {
+            ImageView postimage = (ImageView) view.findViewById(R.id.postimage);
             Picasso.with(ctx).load(image).into(postimage);
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -165,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
                 logout();
 
+        } else if ( item.getItemId() == R.id.main_menu){
+            startActivity(new Intent(MainActivity.this, MainMenu.class));
         }
         return super.onOptionsItemSelected(item);
     }
