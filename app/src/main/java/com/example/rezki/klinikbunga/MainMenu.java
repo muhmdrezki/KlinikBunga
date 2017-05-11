@@ -38,7 +38,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()==null){
 
-                    Intent loginIntent = new Intent(MainMenu.this, LoginActivity.class);
+                    Intent loginIntent = new Intent(MainMenu.this, FIrstActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
 

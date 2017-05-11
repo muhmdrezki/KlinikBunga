@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -20,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +44,12 @@ public class MainActivity extends AppCompatActivity {
         postlist = (RecyclerView) findViewById(R.id.postlist);
         postlist.setHasFixedSize(true);
         postlist.setLayoutManager(new LinearLayoutManager(this));
-
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        postlist.setHasFixedSize(true);
+        postlist.setLayoutManager(linearLayoutManager);
         firebaseauth = FirebaseAuth.getInstance();
         authlistener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -52,10 +61,22 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
 
+                        final String post_key = getRef(position).getKey();
+
                         viewHolder.setUsername(String.valueOf(model.getUsername()));
                         viewHolder.setTitle(String.valueOf(model.getTitle()));
                         viewHolder.setDesc(String.valueOf(model.getDescription()));
                         viewHolder.setImage(getApplicationContext(), model.getImage());
+
+                        viewHolder.view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //Toast.makeText(MainActivity.this, post_key, Toast.LENGTH_LONG).show();
+                                Intent SinglePostIntent = new Intent(MainActivity.this, SinglePostActivity.class);
+                                SinglePostIntent.putExtra("post_id", post_key);
+                                startActivity(SinglePostIntent);
+                            }
+                        });
                     }
                 };
                 postlist.setAdapter(firebaseRecyclerAdapter);

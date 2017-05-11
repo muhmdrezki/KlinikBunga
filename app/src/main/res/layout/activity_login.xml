@@ -5,37 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/login"
     tools:context="com.example.rezki.klinikbunga.LoginActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="KLINIK BUNGA"
-        android:textAlignment="center"
-        android:fontFamily="casual"
-        android:textSize="35dp"
-        android:layout_marginTop="30dp"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Express Your Feeling With Flowers"
-        android:textAlignment="center"
-        android:textSize="17dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="casual"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SIGN IN"
-        android:fontFamily="casual"
-        android:textAlignment="center"
-        android:textSize="25dp"
-        android:layout_marginTop="40dp"
-        />
 
     <EditText
         android:id="@+id/etemail"
@@ -45,7 +17,7 @@
         android:layout_marginTop="15dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:fontFamily="casual"/>
+        android:fontFamily="sans-serif-smallcaps"/>
 
     <EditText
         android:id="@+id/etpassword"
@@ -55,7 +27,7 @@
         android:layout_marginTop="15dp"
         android:hint="Password"
         android:inputType="textPassword"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         />
 
     <Button
@@ -65,7 +37,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:text="SIGN IN"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:background="@color/colorPrimary"
         android:textColor="#FFFFFF"/>
 
@@ -74,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Don't Have An Account? Sign Up Here!"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:layout_marginTop="15dp"
         android:textAlignment="center"/>
 </LinearLayout>

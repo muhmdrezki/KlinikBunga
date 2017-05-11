@@ -28,7 +28,9 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".MainMenu"></activity>
+        <activity android:name=".MainMenu" />
+        <activity android:name=".FIrstActivity" />
+        <activity android:name=".SinglePostActivity"></activity>
     </application>
 
 </manifest>

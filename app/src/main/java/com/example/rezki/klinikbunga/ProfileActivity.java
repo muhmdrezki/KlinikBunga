@@ -61,12 +61,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         selectImage = (ImageButton) findViewById(R.id.selectImage);
         etname = (EditText) findViewById(R.id.etname);
         etaddress = (EditText) findViewById(R.id.etaddress);
-        backlink = (TextView) findViewById(R.id.backlink);
         btnsave = (Button) findViewById(R.id.btnsave);
 
         btnsave.setOnClickListener(this);
         selectImage.setOnClickListener(this);
-        backlink.setOnClickListener(this);
     }
 
     @Override
