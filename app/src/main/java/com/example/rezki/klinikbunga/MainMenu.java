@@ -19,8 +19,8 @@ import org.w3c.dom.Text;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView cariIV;
-    private TextView  cariTV;
+    private ImageView cariIV, hadiahIV;
+    private TextView  cariTV, hadiahTV;
     private FirebaseAuth firebaseauth;
     private FirebaseAuth.AuthStateListener authlistener;
     private DatabaseReference db_login;
@@ -56,8 +56,14 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         cariIV = (ImageView) findViewById(R.id.cariIV);
         cariTV = (TextView) findViewById(R.id.cariTV);
 
+        hadiahTV = (TextView) findViewById(R.id.hadiahTV);
+        hadiahIV = (ImageView) findViewById(R.id.hadiahIV);
+
         cariIV.setOnClickListener(this);
         cariTV.setOnClickListener(this);
+
+        hadiahIV.setOnClickListener(this);
+        hadiahTV.setOnClickListener(this);
 
     }
 
@@ -97,6 +103,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
             startActivity(new Intent(MainMenu.this, MainActivity.class));
         } else if (cariIV == view ){
             startActivity(new Intent(MainMenu.this, MainActivity.class));
+        } else if (hadiahTV == view){
+            startActivity(new Intent(MainMenu.this, MainMenu_2_Activity.class));
+        } else if (hadiahIV == view){
+            startActivity(new Intent(MainMenu.this, MainMenu_2_Activity.class));
         }
 
     }

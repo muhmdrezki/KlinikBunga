@@ -28,11 +28,23 @@
         />
 
     <TextView
+        android:id="@+id/category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post Category"
+        android:layout_marginTop="10dp"
+        android:padding="7dp"
+        android:layout_marginLeft="7dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-smallcaps"
+        />
+
+    <TextView
         android:id="@+id/titlepost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="7dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Your Post Title Here"
         android:textSize="15dp"
         android:layout_marginLeft="7dp"
@@ -46,7 +58,7 @@
         android:layout_height="wrap_content"
         android:padding="7dp"
         android:layout_marginLeft="7dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textColor="#FFFFFF"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Your Description Here"

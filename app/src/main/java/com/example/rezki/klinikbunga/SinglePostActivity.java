@@ -25,6 +25,7 @@ public class SinglePostActivity extends AppCompatActivity {
     private ImageView image_post;
     private TextView desc_post;
     private TextView user_post;
+    private TextView category_post;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +38,20 @@ public class SinglePostActivity extends AppCompatActivity {
         desc_post = (TextView) findViewById(R.id.descpost);
         image_post = (ImageView) findViewById(R.id.postimage);
         user_post = (TextView) findViewById(R.id.tvauthor);
+        category_post = (TextView) findViewById(R.id.category);
 
         databaseReference.child(mPostkey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String Post_Title = (String) dataSnapshot.child("title").getValue();
                 String Post_Desc = (String) dataSnapshot.child("description").getValue();
+                String category = (String) dataSnapshot.child("category").getValue();
                 String Post_image = (String) dataSnapshot.child("image").getValue();
                 String Post_uid = (String) dataSnapshot.child("uid").getValue();
                 String Post_auth = (String) dataSnapshot.child("username").getValue();
 
                 title_post.setText(Post_Title);
+                category_post.setText("Categoty " + category);
                 desc_post.setText(Post_Desc);
                 user_post.setText("Posted By " + Post_auth);
                 Picasso.with(SinglePostActivity.this).load(Post_image).into(image_post);

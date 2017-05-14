@@ -4,7 +4,7 @@ package com.example.rezki.klinikbunga;
  * Created by Rezki on 4/17/2017.
  */
 
-public class Post {
+public class Post1 {
 
 
     private String title;
@@ -16,11 +16,11 @@ public class Post {
     private String image;
     private String username;
 
-    public Post(){
+    public Post1(){
 
     }
 
-    public Post(String title, String description, String image, String username, String category) {
+    public Post1(String title, String description, String image, String username, String category) {
         this.title = title;
         this.description = description;
         this.image = image;

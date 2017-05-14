@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +40,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button buttonsubmit;
     private ImageButton imageselect;
+
+    private Spinner sp_name;
 
     private Uri imageURI;
 
@@ -68,6 +71,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         posttitle       = (EditText) findViewById(R.id.posttitle);
         postdesc        = (EditText) findViewById(R.id.postdesc);
         buttonsubmit    = (Button) findViewById(R.id.buttonsubmit);
+        sp_name         = (Spinner) findViewById(R.id.sp_name);
 
         //Supaya Tombol/Link Berfungsi
         imageselect.setOnClickListener(this);
@@ -80,6 +84,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         //Deklarasi Variable
         final String judul = posttitle.getText().toString().trim();
         final String deskripsi = postdesc.getText().toString().trim();
+        final String kategori = sp_name.getSelectedItem().toString().trim();
 
         //Title, Deskripsi, Gambar gabisa kosong
         if(!TextUtils.isEmpty(judul) && !TextUtils.isEmpty(deskripsi) && imageURI != null){
@@ -102,6 +107,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
                              newPost.child("title").setValue(judul);
                              newPost.child("description").setValue(deskripsi);
+                             newPost.child("category").setValue(kategori);
                              newPost.child("image").setValue(downloadUrl.toString());
                              newPost.child("uid").setValue(user.getUid());
                              newPost.child("username").setValue(dataSnapshot.child("name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {

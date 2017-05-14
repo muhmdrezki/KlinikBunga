@@ -2,46 +2,43 @@ package com.example.rezki.klinikbunga;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-
-public class MainActivity extends AppCompatActivity {
+public class HadiahActivity extends AppCompatActivity {
 
     private RecyclerView postlist;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseauth;
     private FirebaseAuth.AuthStateListener authlistener;
+    private Query QueryDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_hadiah);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
         databaseReference.keepSynced(true);
 
-        postlist = (RecyclerView) findViewById(R.id.postlist);
+        QueryDatabase = databaseReference.orderByChild("category").equalTo("Kasih Sayang");
+
+        postlist = (RecyclerView) findViewById(R.id.postlist1);
+
         postlist.setHasFixedSize(true);
         postlist.setLayoutManager(new LinearLayoutManager(this));
 
@@ -55,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseauth = FirebaseAuth.getInstance();
         authlistener = new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseRecyclerAdapter<Post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
+                FirebaseRecyclerAdapter<Post1, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post1, PostViewHolder>
+                        ( Post1.class, R.layout.second_post_row, PostViewHolder.class, QueryDatabase) {
 
-                        Post.class, R.layout.post_row, PostViewHolder.class, databaseReference
-                ) {
                     @Override
-                    protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
+                    protected void populateViewHolder(PostViewHolder viewHolder, Post1 model, int position) {
 
                         final String post_key = getRef(position).getKey();
 
@@ -75,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
                         viewHolder.view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //Toast.makeText(MainActivity.this, post_key, Toast.LENGTH_LONG).show();
-                                Intent SinglePostIntent = new Intent(MainActivity.this, SinglePostActivity.class);
-                                SinglePostIntent.putExtra("post_id", post_key);
-                                startActivity(SinglePostIntent);
+                                Toast.makeText(HadiahActivity.this, post_key, Toast.LENGTH_LONG).show();
+                                //Intent SinglePostIntent = new Intent(MainActivity.this, SinglePostActivity.class);
+                                //SinglePostIntent.putExtra("post_id", post_key);
+                                //startActivity(SinglePostIntent);
                             }
                         });
                     }
@@ -88,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-  @Override
+    @Override
     protected void onStart() {
         super.onStart();
         firebaseauth.addAuthStateListener(authlistener);
@@ -126,38 +123,5 @@ public class MainActivity extends AppCompatActivity {
             ImageView postimage = (ImageView) view.findViewById(R.id.postimage);
             Picasso.with(ctx).load(image).into(postimage);
         }
-    }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId()== R.id.action_add){
-
-                startActivity(new Intent(MainActivity.this,PostActivity.class));
-
-        } else if ( item.getItemId() == R.id.logout){
-
-                logout();
-
-        } else if ( item.getItemId() == R.id.main_menu){
-            startActivity(new Intent(MainActivity.this, MainMenu.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void logout() {
-
-        firebaseauth.signOut();
-
     }
 }
