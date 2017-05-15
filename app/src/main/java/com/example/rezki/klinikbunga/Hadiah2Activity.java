@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
-public class HadiahActivity extends AppCompatActivity {
+public class Hadiah2Activity extends AppCompatActivity {
 
     private RecyclerView postlist;
     private DatabaseReference databaseReference;
@@ -30,12 +29,12 @@ public class HadiahActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hadiah);
+        setContentView(R.layout.activity_hadiah2);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
         databaseReference.keepSynced(true);
 
-        QueryDatabase = databaseReference.orderByChild("category").equalTo("Kasih Sayang");
+        QueryDatabase = databaseReference.orderByChild("category").equalTo("Tanda Terima Kasih");
 
         postlist = (RecyclerView) findViewById(R.id.postlist1);
 
@@ -73,7 +72,7 @@ public class HadiahActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 //Toast.makeText(HadiahActivity.this, post_key, Toast.LENGTH_LONG).show();
-                                Intent SinglePostIntent = new Intent(HadiahActivity
+                                Intent SinglePostIntent = new Intent(Hadiah2Activity
                                         .this, SinglePostActivity.class);
                                 SinglePostIntent.putExtra("post_id", post_key);
                                 startActivity(SinglePostIntent);
@@ -125,4 +124,5 @@ public class HadiahActivity extends AppCompatActivity {
             Picasso.with(ctx).load(image).into(postimage);
         }
     }
+
 }

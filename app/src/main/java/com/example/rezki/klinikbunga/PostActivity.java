@@ -87,7 +87,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         final String kategori = sp_name.getSelectedItem().toString().trim();
 
         //Title, Deskripsi, Gambar gabisa kosong
-        if(!TextUtils.isEmpty(judul) && !TextUtils.isEmpty(deskripsi) && imageURI != null){
+        if(!TextUtils.isEmpty(judul) && !TextUtils.isEmpty(deskripsi) && kategori == ("Pilih Kategori") && imageURI != null){
         //Proses Upload
             //Menampilkan Progress Bar
             progressdialog.setMessage("Posting, Please Wait");
@@ -132,7 +132,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             });
         }else{
             progressdialog.dismiss();
-            Toast.makeText(this, "Error",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Can't post, make sure you fill all the blanks",Toast.LENGTH_LONG).show();
         }
 
     }

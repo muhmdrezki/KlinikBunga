@@ -32,7 +32,9 @@
         <activity android:name=".FIrstActivity" />
         <activity android:name=".SinglePostActivity" />
         <activity android:name=".HadiahActivity" />
-        <activity android:name=".MainMenu_2_Activity"></activity>
+        <activity android:name=".MainMenu_2_Activity" />
+        <activity android:name=".Hadiah2Activity" />
+        <activity android:name=".Hadiah3Activity"></activity>
     </application>
 
 </manifest>
