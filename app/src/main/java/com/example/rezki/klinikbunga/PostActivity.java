@@ -116,7 +116,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                                      if(task.isSuccessful()){
                                             progressdialog.dismiss();
                                             startActivity(new Intent(PostActivity.this, MainActivity.class));
-                                            Toast.makeText(PostActivity.this, " Uplooad Succes ", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(PostActivity.this, " Uplooad Success ", Toast.LENGTH_LONG).show();
                                      }
                                  }
                              });
