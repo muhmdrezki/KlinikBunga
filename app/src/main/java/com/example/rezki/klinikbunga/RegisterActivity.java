@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
         } else {
             progressdialog.dismiss();
-            Toast.makeText(RegisterActivity.this, "Please Fill The Form First.", Toast.LENGTH_LONG).show(); }
+            Toast.makeText(RegisterActivity.this, "Please Fill The Form First", Toast.LENGTH_LONG).show(); }
 
     }
 }
