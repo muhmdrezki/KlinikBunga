@@ -18,6 +18,10 @@
             android:inputType="textEmailAddress"
             android:fontFamily="sans-serif-smallcaps"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
         <EditText
             android:id="@+id/etpassword"
             android:layout_width="325dp"

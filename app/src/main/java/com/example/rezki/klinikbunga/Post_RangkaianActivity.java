@@ -1,12 +1,9 @@
 package com.example.rezki.klinikbunga;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,9 +28,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
-public class PostActivity extends AppCompatActivity implements View.OnClickListener {
+public class Post_RangkaianActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText posttitle;
     private EditText postdesc;
@@ -56,12 +51,12 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
+        setContentView(R.layout.activity_post__rangkaian);
 
         //Tampung ID di Variable
         storage = FirebaseStorage.getInstance().getReference();
         progressdialog = new ProgressDialog(this);
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Rangkaian");
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
@@ -75,8 +70,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         //Supaya Tombol/Link Berfungsi
         imageselect.setOnClickListener(this);
         buttonsubmit.setOnClickListener(this);
-    }
 
+    }
 
     //Fungsi Posting
     private void StartPosting() {
@@ -86,7 +81,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         final String kategori = sp_name.getSelectedItem().toString().trim();
 
         //Title, Deskripsi, Gambar gabisa kosong
-        if(!TextUtils.isEmpty(judul) && !TextUtils.isEmpty(deskripsi) && !kategori.equals("Pilih Kategori") && imageURI != null){
+        if (!TextUtils.isEmpty(judul) && !TextUtils.isEmpty(deskripsi) && !kategori.equals("Pilih Kategori") && imageURI != null) {
             //Proses Upload
             //Menampilkan Progress Bar
             progressdialog.setMessage("Posting, Please Wait");
@@ -102,8 +97,6 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     user_db.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
-
                             newPost.child("title").setValue(judul);
                             newPost.child("description").setValue(deskripsi);
                             newPost.child("category").setValue(kategori);
@@ -112,10 +105,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                             newPost.child("username").setValue(dataSnapshot.child("name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         progressdialog.dismiss();
-                                        startActivity(new Intent(PostActivity.this, MainActivity.class));
-                                        Toast.makeText(PostActivity.this, " Upload Success ", Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(Post_RangkaianActivity.this, RangkaianActivity.class));
+                                        Toast.makeText(Post_RangkaianActivity.this, " Upload Success ", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -129,16 +122,15 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     });
                 }
             });
-        }else{
+        } else {
             progressdialog.dismiss();
-            Toast.makeText(this, "Can't post, make sure you fill all the blanks",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Can't post, make sure you fill all the blanks", Toast.LENGTH_LONG).show();
         }
-
     }
 
     @Override
     public void onClick(View view) {
-          if(imageselect==view)
+        if(imageselect==view)
         {
             Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
             galleryIntent.setType("image/*");
@@ -158,5 +150,3 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
-
-

@@ -34,7 +34,9 @@
         <activity android:name=".HadiahActivity" />
         <activity android:name=".MainMenu_2_Activity" />
         <activity android:name=".Hadiah2Activity" />
-        <activity android:name=".Hadiah3Activity"></activity>
+        <activity android:name=".Hadiah3Activity" />
+        <activity android:name=".RangkaianActivity" />
+        <activity android:name=".Post_RangkaianActivity"></activity>
     </application>
 
 </manifest>

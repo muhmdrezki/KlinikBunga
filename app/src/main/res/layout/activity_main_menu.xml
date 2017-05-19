@@ -24,11 +24,11 @@
                 android:id="@+id/hadiahTV"
                 android:padding="10dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/textView3"
-                android:layout_alignStart="@+id/textView3" />
+                android:layout_alignLeft="@+id/rangkaibunga"
+                android:layout_alignStart="@+id/rangkaibunga" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/rangkaibunga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="RACIK BUNGA"
@@ -66,7 +66,7 @@
         android:layout_alignStart="@+id/textView4" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/rangkaibungaIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/racik"
