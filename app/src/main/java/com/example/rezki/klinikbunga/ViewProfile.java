@@ -2,52 +2,101 @@ package com.example.rezki.klinikbunga;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
+public class ViewProfile extends AppCompatActivity implements View.OnClickListener{
 
+    private ImageView iv_profile;
+    private TextView tv_address, tv_nama;
+    private Button btn_Edit;
 
-public class MainActivity extends AppCompatActivity {
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private Query QueryDatabase;
+    private FirebaseAuth.AuthStateListener authlistener;
+
+    private DatabaseReference db_user, db_post;
+    private StorageReference storage_Ref;
 
     private RecyclerView postlist;
-    private DatabaseReference databaseReference;
-    private FirebaseAuth firebaseauth;
-    private FirebaseAuth.AuthStateListener authlistener;
+
+    private String nama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_view_profile);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
-        databaseReference.keepSynced(true);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        String uid = user.getUid().toString().trim();
 
-        postlist = (RecyclerView) findViewById(R.id.postlist);
+        db_post = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
+        db_post.keepSynced(true);
+
+        iv_profile = (ImageView) findViewById(R.id.iv_profile);
+        tv_address = (TextView) findViewById(R.id.tv_address);
+        tv_nama = (TextView) findViewById(R.id.tv_nama);
+        btn_Edit = (Button) findViewById(R.id.buttonedit);
+
+        btn_Edit.setOnClickListener(this);
+
+        db_user = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        storage_Ref = FirebaseStorage.getInstance().getReference().child("Profile_images");
+
+        auth = FirebaseAuth.getInstance();
+        db_user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final String nama_user = (String) dataSnapshot.child("name").getValue();
+                String alamat_user = (String) dataSnapshot.child("address").getValue();
+                String image_user = (String) dataSnapshot.child("image").getValue();
+
+                Picasso.with(ViewProfile.this).load(image_user).into(iv_profile);
+                tv_address.setText(alamat_user);
+                tv_nama.setText(nama_user);
+                nama = nama_user;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        Toast.makeText(ViewProfile.this, uid, Toast.LENGTH_LONG ).show();
+        postlist = (RecyclerView) findViewById(R.id.post_list1);
+
         postlist.setHasFixedSize(true);
         postlist.setLayoutManager(new LinearLayoutManager(this));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
@@ -55,13 +104,15 @@ public class MainActivity extends AppCompatActivity {
         postlist.setHasFixedSize(true);
         postlist.setLayoutManager(linearLayoutManager);
 
-        firebaseauth = FirebaseAuth.getInstance();
+        QueryDatabase = db_post.orderByChild("uid").equalTo(uid);
+
+        auth = FirebaseAuth.getInstance();
         authlistener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseRecyclerAdapter<Post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
 
-                        Post.class, R.layout.post_row, PostViewHolder.class, databaseReference
+                        Post.class, R.layout.post_row, PostViewHolder.class, QueryDatabase
                 ) {
                     @Override
                     protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
@@ -78,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 //Toast.makeText(MainActivity.this, post_key, Toast.LENGTH_LONG).show();
-                                Intent SinglePostIntent = new Intent(MainActivity.this, SinglePostActivity.class);
+                                Intent SinglePostIntent = new Intent(ViewProfile.this, SinglePostActivity.class);
                                 SinglePostIntent.putExtra("post_id", post_key);
                                 startActivity(SinglePostIntent);
                             }
@@ -90,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-  @Override
+    @Override
     protected void onStart() {
         super.onStart();
-        firebaseauth.addAuthStateListener(authlistener);
+        auth.addAuthStateListener(authlistener);
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
@@ -130,38 +181,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId()== R.id.action_add){
-
-                startActivity(new Intent(MainActivity.this,PostActivity.class));
-
-        } else if ( item.getItemId() == R.id.logout){
-
-                logout();
-
-        } else if ( item.getItemId() == R.id.main_menu){
-            startActivity(new Intent(MainActivity.this, MainMenu.class));
-        } else if (item.getItemId()==R.id.profile){
-            startActivity(new Intent(MainActivity.this, ViewProfile.class));
+    public void onClick(View view) {
+        if(view==btn_Edit){
+            startActivity(new Intent(ViewProfile.this, ProfileActivity.class));
         }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void logout() {
-
-        firebaseauth.signOut();
-
     }
 }

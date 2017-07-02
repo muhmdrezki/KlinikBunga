@@ -14,10 +14,10 @@
         android:layout_width="325dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="24dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:fontFamily="sans-serif-smallcaps"/>
+        android:fontFamily="sans-serif-light"/>
 
     <EditText
         android:id="@+id/etpassword"
@@ -27,7 +27,7 @@
         android:layout_marginTop="15dp"
         android:hint="Password"
         android:inputType="textPassword"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-light"
         />
 
     <Button
@@ -36,17 +36,17 @@
         android:layout_height="45dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:text="SIGN IN"
-        android:fontFamily="sans-serif-smallcaps"
         android:background="@color/colorPrimary"
-        android:textColor="#FFFFFF"/>
+        android:fontFamily="sans-serif-light"
+        android:text="SIGN IN"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/registerlink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Don't Have An Account? Sign Up Here!"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-light"
         android:layout_marginTop="15dp"
         android:textAlignment="center"/>
 </LinearLayout>

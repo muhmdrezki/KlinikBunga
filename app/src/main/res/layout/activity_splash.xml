@@ -5,28 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/splashback"
+    android:background="@drawable/splashscreen"
     tools:context="com.example.rezki.klinikbunga.SplashActivity"
     android:weightSum="1">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="359dp"
-        android:layout_height="352dp"
-        android:layout_gravity="center"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/whitesplash"
-        />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:text="Initializing..."
-        android:textSize="20dp"
-        />
 
 </LinearLayout>

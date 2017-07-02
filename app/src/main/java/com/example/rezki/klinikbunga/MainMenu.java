@@ -19,7 +19,7 @@ import org.w3c.dom.Text;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView cariIV, hadiahIV, rangkaiIV;
+    private ImageView cariIV, hadiahIV, rangkaiIV, iv_profile, iv_settings;
     private TextView  cariTV, hadiahTV, rangkaiTV;
     private FirebaseAuth firebaseauth;
     private FirebaseAuth.AuthStateListener authlistener;
@@ -53,6 +53,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         db_login = FirebaseDatabase.getInstance().getReference().child("Users");
         db_login.keepSynced(true);
 
+        iv_profile = (ImageView) findViewById(R.id.iv_profile);
+
         cariIV = (ImageView) findViewById(R.id.cariIV);
         cariTV = (TextView) findViewById(R.id.cariTV);
 
@@ -70,6 +72,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         rangkaiIV.setOnClickListener(this);
         rangkaiTV.setOnClickListener(this);
+
+        iv_profile.setOnClickListener(this);
 
     }
 
@@ -117,6 +121,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
             startActivity(new Intent(MainMenu.this, RangkaianActivity.class));
         } else if (rangkaiIV == view){
             startActivity(new Intent(MainMenu.this, RangkaianActivity.class));
+        } else if (iv_profile == view) {
+            startActivity(new Intent(MainMenu.this, ViewProfile.class));
         }
     }
 }

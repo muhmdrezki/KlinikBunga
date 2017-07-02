@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference db_login;
     private FirebaseAuth firebaseauth;
     private StorageReference image_storage;
+    private FirebaseUser user_Ref;
 
     private ProgressDialog progressdialog;
 
@@ -55,7 +57,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         progressdialog = new ProgressDialog(this);
 
         db_login = FirebaseDatabase.getInstance().getReference().child("Users");
+
         firebaseauth = FirebaseAuth.getInstance();
+        user_Ref = firebaseauth.getCurrentUser();
+        String uid = user_Ref.toString().trim();
+
+
         image_storage = FirebaseStorage.getInstance().getReference().child("Profile_images");
 
         selectImage = (ImageButton) findViewById(R.id.selectImage);

@@ -98,12 +98,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     final Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     //Database Push
                     final DatabaseReference newPost = databaseReference.push();
-
                     user_db.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
-
                             newPost.child("title").setValue(judul);
                             newPost.child("description").setValue(deskripsi);
                             newPost.child("category").setValue(kategori);

@@ -4,25 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blur1"
+    android:background="@drawable/firstpage"
     android:orientation="vertical"
     tools:context="com.example.rezki.klinikbunga.FIrstActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginRight="5dp"
-        android:src="@drawable/whitesplash"
-        />
 
     <Button
             android:id="@+id/btnsignin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="490dp"
             android:text="SIGN IN"
             android:textColor="#FFFFFF"
-            android:background="@color/colorPrimary"
+            android:background="#F23800"
             android:layout_gravity="center"
             />
         <Button
@@ -31,23 +24,23 @@
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:text="REGISTER"
-            android:background="#FFFFFF"
+            android:textColor="#f9f9f9"
+            android:background="#00ACC1"
             android:layout_gravity="center"
-          />
-
+        />
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="15dp"
                 android:text="Klinik Bunga 2017"
-                android:fontFamily="sans-serif-smallcaps"
+                android:fontFamily="sans-serif-light"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
+                android:textColor="#212121"
                 />
         </RelativeLayout>
 

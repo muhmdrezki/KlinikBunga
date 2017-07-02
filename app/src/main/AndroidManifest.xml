@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity" android:theme="@style/SplashTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,15 +28,16 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".MainMenu" />
-        <activity android:name=".FIrstActivity" />
+        <activity android:name=".MainMenu" android:theme="@style/NoActionBar"/>
+        <activity android:name=".FIrstActivity" android:theme="@style/SplashTheme.FullScreen" />
         <activity android:name=".SinglePostActivity" />
         <activity android:name=".HadiahActivity" />
-        <activity android:name=".MainMenu_2_Activity" />
+        <activity android:name=".MainMenu_2_Activity" android:theme="@style/NoActionBar" />
         <activity android:name=".Hadiah2Activity" />
         <activity android:name=".Hadiah3Activity" />
         <activity android:name=".RangkaianActivity" />
-        <activity android:name=".Post_RangkaianActivity"></activity>
+        <activity android:name=".Post_RangkaianActivity" />
+        <activity android:name=".ViewProfile"></activity>
     </application>
 
 </manifest>

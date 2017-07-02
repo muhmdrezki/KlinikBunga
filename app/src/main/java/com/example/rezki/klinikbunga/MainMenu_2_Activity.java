@@ -15,9 +15,9 @@ public class MainMenu_2_Activity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_2_);
 
-        link1 = (TextView) findViewById(R.id.kasihsayang);
-        link2 = (TextView) findViewById(R.id.thanks);
-        link3 = (TextView) findViewById(R.id.duka);
+        link1 = (TextView) findViewById(R.id.LoveTV);
+        link2 = (TextView) findViewById(R.id.thanksTV);
+        link3 = (TextView) findViewById(R.id.dukaTV);
 
         link1.setOnClickListener(this);
         link2.setOnClickListener(this);

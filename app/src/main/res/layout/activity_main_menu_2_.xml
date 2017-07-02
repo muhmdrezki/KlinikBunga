@@ -1,76 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menublur3"
+    android:orientation="vertical"
+    android:background="@drawable/kasihbunga"
     tools:context="com.example.rezki.klinikbunga.MainMenu_2_Activity">
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:foregroundGravity="bottom"
-        android:src="@drawable/love"
-        android:layout_above="@+id/thanks"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="41dp" />
-    <TextView
-        android:id="@+id/kasihsayang"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="KASIH SAYANG"
-        android:textColor="#FFFFFF"
-        android:gravity="bottom|left"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:textSize="24dp"
-         />
-
-    <ImageView
-        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/happy"
-        android:layout_alignBottom="@+id/thanks"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="49dp" />
-    <TextView
-        android:id="@+id/thanks"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:text="TERIMA KASIH"
-        android:textColor="#FFFFFF"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="bottom|left"
-        android:textSize="24dp"
-        android:layout_below="@+id/kasihsayang"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:gravity="right"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sad"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="49dp" />
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/acc"
+            />
+        <ImageView
+            android:id="@+id/iv_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sett"
+            />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/duka"
+        android:id="@+id/textView4"
+        android:textSize="28dp"
+        android:textColor="#424242"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:text="BERDUKA"
-        android:textColor="#FFFFFF"
-        android:paddingLeft="10dp"
-        android:paddingBottom="15dp"
-        android:gravity="bottom|left"
+        android:layout_height="wrap_content"
+        android:text="Pilih Kategori"
+        android:fontFamily="sans-serif-light"
+        android:textAlignment="center"
+        android:layout_marginTop="37dp" />
+
+    <ImageView
+        android:id="@+id/LoveIV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/love"
+        android:layout_marginTop="42dp" />
+
+    <TextView
+        android:id="@+id/LoveTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kasih Sayang"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#424242"
+        android:textAlignment="center"
         android:textSize="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="20dp"/>
 
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/rangkaibungaIV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/happy"
+        />
+
+    <TextView
+        android:id="@+id/thanksTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Terima Kasih"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#424242"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <ImageView
+        android:id="@+id/hadiahIV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/sad"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#424242"
+        android:text="Berduka Cita"
+        android:fontFamily="sans-serif-light"
+        android:textSize="24dp"
+        android:id="@+id/dukaTV"
+        android:textAlignment="center"
+        />
+
+
+</LinearLayout>
