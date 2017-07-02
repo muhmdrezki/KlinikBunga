@@ -37,24 +37,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Your Profile"
+                android:text="Profile Anda"
+                android:textStyle="bold"
                 android:textAlignment="center"
+                android:fontFamily="sans-serif-light"
                 android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Nama"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-light"
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_nama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="3dp"
                 android:text="Your Name"
+                android:fontFamily="sans-serif-light"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Alamat"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-light"
                 android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="3dp"
                 android:text="Your Address"
+                android:fontFamily="sans-serif-light"
                 android:textSize="14dp" />
 
         </LinearLayout>
@@ -75,6 +97,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="YOUR POSTS"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="bold"
         android:layout_marginBottom="20dp"
         android:textSize="20dp"
         />

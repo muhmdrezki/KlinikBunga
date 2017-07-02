@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/splashback"
+    android:background="@color/colorPrimary"
     tools:context="com.example.rezki.klinikbunga.SinglePostActivity">
 
     <ImageView
@@ -23,7 +23,7 @@
         android:text="Post Author"
         android:layout_marginLeft="7dp"
         android:textColor="#FFFFFF"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-light"
         android:padding="7dp"
         />
 
@@ -36,7 +36,7 @@
         android:padding="7dp"
         android:layout_marginLeft="7dp"
         android:textColor="#FFFFFF"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-light"
         />
 
     <TextView
@@ -49,7 +49,7 @@
         android:textSize="15dp"
         android:layout_marginLeft="7dp"
         android:textColor="#FFFFFF"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-light"
         android:textStyle="bold" />
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_marginLeft="7dp"
         android:layout_marginTop="10dp"
         android:textColor="#FFFFFF"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-light"
         android:text="Your Description Here"
         android:textSize="13dp" />
 

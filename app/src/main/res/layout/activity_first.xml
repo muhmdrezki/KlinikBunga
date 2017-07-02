@@ -16,6 +16,7 @@
             android:text="SIGN IN"
             android:textColor="#FFFFFF"
             android:background="#F23800"
+            android:fontFamily="sans-serif-light"
             android:layout_gravity="center"
             />
         <Button
@@ -24,6 +25,7 @@
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:text="REGISTER"
+            android:fontFamily="sans-serif-light"
             android:textColor="#f9f9f9"
             android:background="#00ACC1"
             android:layout_gravity="center"

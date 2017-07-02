@@ -23,20 +23,20 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".PostActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".PostActivity" android:label="Post Tentang Bunga"/>
+        <activity android:name=".RegisterActivity" android:label="Register"/>
+        <activity android:name=".LoginActivity" android:label="Login"/>
+        <activity android:name=".ProfileActivity" android:label="Your Profile"/>
+        <activity android:name=".MainActivity" android:label="Jenis - Jenis Bunga"/>
         <activity android:name=".MainMenu" android:theme="@style/NoActionBar"/>
         <activity android:name=".FIrstActivity" android:theme="@style/SplashTheme.FullScreen" />
-        <activity android:name=".SinglePostActivity" />
-        <activity android:name=".HadiahActivity" />
+        <activity android:name=".SinglePostActivity" android:label="Detail Postingan"/>
+        <activity android:name=".HadiahActivity" android:label="Kategori : Kasih Sayang" />
         <activity android:name=".MainMenu_2_Activity" android:theme="@style/NoActionBar" />
-        <activity android:name=".Hadiah2Activity" />
-        <activity android:name=".Hadiah3Activity" />
-        <activity android:name=".RangkaianActivity" />
-        <activity android:name=".Post_RangkaianActivity" />
+        <activity android:name=".Hadiah2Activity" android:label="Kategori : Tanda Terima Kasih"/>
+        <activity android:name=".Hadiah3Activity" android:label="Kategori : Berduka" />
+        <activity android:name=".RangkaianActivity" android:label="Rangkaian Bunga"/>
+        <activity android:name=".Post_RangkaianActivity" android:label="Post Tentang Bunga" />
         <activity android:name=".ViewProfile"></activity>
     </application>
 

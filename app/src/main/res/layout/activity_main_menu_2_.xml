@@ -43,8 +43,8 @@
         android:id="@+id/LoveIV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/love"
-        android:layout_marginTop="42dp" />
+        android:layout_marginTop="42dp"
+        app:srcCompat="@drawable/love" />
 
     <TextView
         android:id="@+id/LoveTV"
@@ -59,7 +59,7 @@
 
 
     <ImageView
-        android:id="@+id/rangkaibungaIV"
+        android:id="@+id/thanksIV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/happy"
@@ -78,7 +78,7 @@
         />
 
     <ImageView
-        android:id="@+id/hadiahIV"
+        android:id="@+id/dukaIV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/sad"

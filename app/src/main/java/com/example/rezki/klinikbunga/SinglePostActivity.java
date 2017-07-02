@@ -51,7 +51,7 @@ public class SinglePostActivity extends AppCompatActivity {
                 String Post_auth = (String) dataSnapshot.child("username").getValue();
 
                 title_post.setText(Post_Title);
-                category_post.setText("Categoty " + category);
+                category_post.setText("Category " + category);
                 desc_post.setText(Post_Desc);
                 user_post.setText("Posted By " + Post_auth);
                 Picasso.with(SinglePostActivity.this).load(Post_image).into(image_post);

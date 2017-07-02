@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashback"
+    android:background="@color/colorPrimary"
     tools:context="com.example.rezki.klinikbunga.Post_RangkaianActivity">
 
     <LinearLayout
@@ -69,8 +69,8 @@
         android:layout_width="match_parent"
         android:layout_gravity="center"
         android:text="SUBMIT POST"
-        android:textColor="#FFFFFF"
-        android:background="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
+        android:background="#f9f9f9"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
