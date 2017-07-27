@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="YOUR PROFILE"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="sans-serif-light"
         android:textSize="31dp"
         android:textColor="#000000"
         android:layout_marginTop="35dp"
@@ -26,16 +26,35 @@
         android:layout_marginTop="40dp"
         android:src="@mipmap/ic_add_a_photo_black_48dp" />
 
-    <EditText
-        android:id="@+id/etname"
+    <TextView
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:hint="Name"
-        android:layout_marginTop="50dp"
+        android:text="Name"
+        android:textSize="18dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"/>
+
+    <TextView
+        android:id="@+id/tvname"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:text="Your Name Here"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:fontFamily="sans-serif-light"
         />
+
+    <TextView
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-light"/>
+
     <EditText
         android:id="@+id/etaddress"
         android:layout_width="275dp"
@@ -43,8 +62,7 @@
         android:hint="Address"
         android:fontFamily="sans-serif-light"
         android:layout_gravity="center"
-        android:textColor="#000000"
-        android:layout_marginTop="10dp"
+
         />
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,7 +76,7 @@
         android:background="@color/colorPrimary"
         android:textColor="#FFFFFF"
         android:fontFamily="sans-serif-light"
-        android:text="SAVE"
+        android:text="UPDATE PROFILE"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>

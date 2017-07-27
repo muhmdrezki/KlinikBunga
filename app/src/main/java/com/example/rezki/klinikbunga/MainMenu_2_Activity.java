@@ -1,16 +1,21 @@
 package com.example.rezki.klinikbunga;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu_2_Activity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView link1, link2, link3;
-    private ImageView img1, img2, img3, iv_profile;
+    private ImageView img1, img2, img3, iv_profile, iv_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,9 @@ public class MainMenu_2_Activity extends AppCompatActivity implements View.OnCli
 
         iv_profile = (ImageView) findViewById(R.id.iv_profile);
         iv_profile.setOnClickListener(this);
+
+        iv_logout = (ImageView) findViewById(R.id.iv_logout);
+        iv_logout.setOnClickListener(this);
     }
 
     @Override
@@ -53,6 +61,9 @@ public class MainMenu_2_Activity extends AppCompatActivity implements View.OnCli
             startActivity(new Intent(MainMenu_2_Activity.this, Hadiah3Activity.class));
         } else if (view==iv_profile){
             startActivity(new Intent(MainMenu_2_Activity.this, ViewProfile.class));
+        } else if(view==iv_logout){
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            auth.signOut();
         }
     }
 }

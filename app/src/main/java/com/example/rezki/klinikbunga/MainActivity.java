@@ -2,6 +2,7 @@ package com.example.rezki.klinikbunga;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +22,12 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -31,9 +36,13 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView postlist;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, likesRef, userRef;
     private FirebaseAuth firebaseauth;
     private FirebaseAuth.AuthStateListener authlistener;
+
+    private String name;
+
+    private Boolean like_click = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,29 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
         databaseReference.keepSynced(true);
+
+        likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+        likesRef.keepSynced(true);
+
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        userRef.keepSynced(true);
+
+        firebaseauth = FirebaseAuth.getInstance();
+
+        String uid = firebaseauth.getCurrentUser().getUid().toString().trim();
+
+        userRef.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String nama = (String) dataSnapshot.child("name").getValue();
+                name = nama;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         postlist = (RecyclerView) findViewById(R.id.postlist);
         postlist.setHasFixedSize(true);
@@ -58,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseauth = FirebaseAuth.getInstance();
         authlistener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull final FirebaseAuth firebaseAuth) {
                 FirebaseRecyclerAdapter<Post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
 
                         Post.class, R.layout.post_row, PostViewHolder.class, databaseReference
@@ -74,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
                         viewHolder.setCategory(String.valueOf(model.getCategory()));
                         viewHolder.setImage(getApplicationContext(), model.getImage());
 
+                        viewHolder.setBtn_like(post_key);
+
                         viewHolder.view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -83,7 +117,36 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(SinglePostIntent);
                             }
                         });
+
+                   viewHolder.btn_like.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+
+                            like_click = true;
+                               likesRef.addValueEventListener(new ValueEventListener() {
+                                   @Override
+                                   public void onDataChange(DataSnapshot dataSnapshot) {
+                                       if (like_click) {
+                                           if (dataSnapshot.child(post_key).hasChild(firebaseAuth.getCurrentUser().getUid())) {
+                                               likesRef.child(post_key).child(firebaseAuth.getCurrentUser().getUid()).removeValue();
+                                               like_click = false;
+                                           } else {
+                                               likesRef.child(post_key).child(firebaseAuth.getCurrentUser().getUid()).setValue(name);
+                                                like_click = false;
+                                           }
+                                       }
+                                   }
+
+                                   @Override
+                                   public void onCancelled(DatabaseError databaseError) {
+
+                                   }
+                               });
+                       }
+                   });
+
                     }
+
                 };
                 postlist.setAdapter(firebaseRecyclerAdapter);
             }
@@ -99,9 +162,37 @@ public class MainActivity extends AppCompatActivity {
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         View view;
 
+        ImageView btn_like;
+
+        DatabaseReference like_db;
+        FirebaseAuth auth;
+
         public PostViewHolder(View itemView) {
             super(itemView);
             view = itemView;
+
+            btn_like = (ImageView) view.findViewById(R.id.btn_like);
+            auth = FirebaseAuth.getInstance();
+            like_db = FirebaseDatabase.getInstance().getReference().child("Likes");
+            like_db.keepSynced(true);
+        }
+
+        public void setBtn_like(final String post_key){
+            like_db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.child(post_key).hasChild(auth.getCurrentUser().getUid())){
+                        btn_like.setImageResource(R.drawable.redlike);
+                    } else {
+                        btn_like.setImageResource(R.drawable.greylike);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         public void setUsername(String username) {
@@ -143,7 +234,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId()== R.id.action_add){
+        if(item.getItemId()==R.id.action_search){
+            startActivity(new Intent(MainActivity.this, SearchPost_Activity.class));
+        } else if(item.getItemId()== R.id.action_add){
 
                 startActivity(new Intent(MainActivity.this,PostActivity.class));
 

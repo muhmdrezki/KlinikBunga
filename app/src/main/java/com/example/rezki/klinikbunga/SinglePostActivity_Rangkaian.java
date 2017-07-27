@@ -1,10 +1,9 @@
 package com.example.rezki.klinikbunga;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,9 +23,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-public class SinglePostActivity extends AppCompatActivity implements View.OnClickListener{
+public class SinglePostActivity_Rangkaian extends AppCompatActivity implements View.OnClickListener{
 
     private String mPostkey;
 
@@ -48,7 +45,7 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_post);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Rangkaian");
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         mPostkey = getIntent().getExtras().getString("post_id");
 
@@ -84,7 +81,7 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
                 category_post.setText("Category " + category);
                 desc_post.setText(Post_Desc);
                 user_post.setText("Posted By " + Post_auth);
-                Picasso.with(SinglePostActivity.this).load(Post_image).into(image_post);
+                Picasso.with(SinglePostActivity_Rangkaian.this).load(Post_image).into(image_post);
 
                 if(userid.equals(Post_uid)){
                     btn_delete.setVisibility(View.VISIBLE);
@@ -102,7 +99,7 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
 
     public void hapus(){
         databaseReference.child(mPostkey).removeValue();
-        startActivity(new Intent(SinglePostActivity.this, MainActivity.class));
+        startActivity(new Intent(SinglePostActivity_Rangkaian.this, RangkaianActivity.class));
     }
 
     boolean doubleBackToExitPressedOnce = false;
@@ -146,14 +143,14 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
 
         if(item.getItemId()== R.id.action_add ){
 
-            startActivity(new Intent(SinglePostActivity.this,Post_RangkaianActivity.class));
+            startActivity(new Intent(SinglePostActivity_Rangkaian.this,Post_RangkaianActivity.class));
 
         } else if ( item.getItemId() == R.id.logout){
 
             logout();
 
         } else if ( item.getItemId() == R.id.main_menu ){
-            startActivity(new Intent(SinglePostActivity.this, MainMenu.class));
+            startActivity(new Intent(SinglePostActivity_Rangkaian.this, MainMenu.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -169,7 +166,7 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
         if(v==btn_delete){
             hapus();
         } if(v==btn_edit){
-            Intent EditPostIntent = new Intent(SinglePostActivity.this, EditActivity.class);
+            Intent EditPostIntent = new Intent(SinglePostActivity_Rangkaian.this, EditRangkaianActivity.class);
             EditPostIntent.putExtra("post_id", mPostkey);
             startActivity(EditPostIntent);
         }

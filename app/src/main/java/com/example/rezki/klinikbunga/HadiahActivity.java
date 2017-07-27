@@ -55,11 +55,11 @@ public class HadiahActivity extends AppCompatActivity {
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseRecyclerAdapter<Post1, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post1, PostViewHolder>
-                        ( Post1.class, R.layout.second_post_row, PostViewHolder.class, QueryDatabase) {
+                FirebaseRecyclerAdapter<Post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>
+                        ( Post.class, R.layout.post_row, PostViewHolder.class, QueryDatabase) {
 
                     @Override
-                    protected void populateViewHolder(PostViewHolder viewHolder, Post1 model, int position) {
+                    protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
 
                         final String post_key = getRef(position).getKey();
 
