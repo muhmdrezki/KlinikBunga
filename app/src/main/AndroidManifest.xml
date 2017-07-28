@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/iconbunga"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/iconbunga"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -73,8 +73,9 @@
             android:label="Your Profile"/>
         <activity android:name=".EditActivity"/>
         <activity android:name=".SearchPost_Activity"
-            android:label="Find Post"/>
-        <activity android:name=".SinglePostActivity_Rangkaian" android:label="Detail Postingan"/>
+                  android:label="Find Post"/>
+        <activity android:name=".SinglePostActivity_Rangkaian"
+                  android:label="Detail Postingan"/>
         <activity android:name=".EditRangkaianActivity" android:label="Edit Post"/>
         <activity android:name=".Search_Result"
             android:label="Search Result"></activity>

@@ -66,4 +66,10 @@ public class MainMenu_2_Activity extends AppCompatActivity implements View.OnCli
             auth.signOut();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MainMenu_2_Activity.this, MainMenu.class));
+    }
+
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -25,7 +26,7 @@ public class Search_Result extends AppCompatActivity {
     private FirebaseAuth firebaseauth;
     private FirebaseAuth.AuthStateListener authlistener;
 
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, rangkaianRef;
     private Query search_query;
 
     @Override
@@ -34,12 +35,19 @@ public class Search_Result extends AppCompatActivity {
         setContentView(R.layout.activity_search__result);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Post_Flower");
+        rangkaianRef = FirebaseDatabase.getInstance().getReference().child("Post_Rangkaian");
 
         Bundle param = getIntent().getExtras();
         String search_param = param.getString("param");
+        String kategori = param.getString("kategori");
 
-        search_query = databaseReference.orderByChild("title").startAt(search_param).endAt(search_param+"\uf8ff");
-        search_query.keepSynced(true);
+        if(kategori.equals("Bunga")) {
+            search_query = databaseReference.orderByChild("title").startAt(search_param).endAt(search_param + "\uf8ff");
+            search_query.keepSynced(true);
+        } else if(kategori.equals("Rangkaian Bunga")){
+            search_query = rangkaianRef.orderByChild("title").startAt(search_param).endAt(search_param + "\uf8ff");
+            search_query.keepSynced(true);
+        }
 
         postlist = (RecyclerView) findViewById(R.id.postlist);
         postlist.setHasFixedSize(true);

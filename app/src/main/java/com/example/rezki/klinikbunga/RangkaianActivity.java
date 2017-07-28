@@ -2,16 +2,19 @@ package com.example.rezki.klinikbunga;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -228,6 +231,8 @@ public class RangkaianActivity extends AppCompatActivity {
 
         } else if ( item.getItemId() == R.id.main_menu ){
             startActivity(new Intent(RangkaianActivity.this, MainMenu.class));
+        } else if (item.getItemId() == R.id.action_search){
+            startActivity(new Intent(RangkaianActivity.this, SearchPost_Activity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -237,5 +242,34 @@ public class RangkaianActivity extends AppCompatActivity {
         firebaseauth.signOut();
 
     }
+
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        final String TAG = this.getClass().getName();
+        Log.d(TAG, "click");
+
+        if (doubleBackToExitPressedOnce==true) {
+            //super.onBackPressed();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        }
+        doubleBackToExitPressedOnce=true;
+        Log.d(TAG, "twice "+ doubleBackToExitPressedOnce);
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+                Log.d(TAG, "twice "+ doubleBackToExitPressedOnce);
+            }
+        }, 3000);
+    }
+
 }
 

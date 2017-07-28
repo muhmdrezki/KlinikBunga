@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class SearchPost_Activity extends AppCompatActivity implements View.OnCli
     private EditText et_search;
     private RecyclerView post_result;
     private Button btn_find;
+    private Spinner sp_search;
 
     private DatabaseReference postRef;
     private Query search_query;
@@ -48,20 +50,22 @@ public class SearchPost_Activity extends AppCompatActivity implements View.OnCli
 
         String postkey = postRef.getParent().toString();
 
-        Toast.makeText(SearchPost_Activity.this, postkey, Toast.LENGTH_SHORT).show();
-
         btn_find = (Button) findViewById(R.id.btn_find);
         btn_find.setOnClickListener(this);
 
+        sp_search = (Spinner) findViewById(R.id.sp_search_kategori);
         et_search = (EditText) findViewById(R.id.et_search);
     }
 
     public void cari_post() {
         final String cari = et_search.getText().toString().trim();
+        final String kategori = sp_search.getSelectedItem().toString().trim();
 
         Intent proses_cari = new Intent(SearchPost_Activity.this, Search_Result.class);
         Bundle search_parameter = new Bundle();
         search_parameter.putString("param",cari);
+        search_parameter.putString("kategori",kategori);
+
         proses_cari.putExtras(search_parameter);
 
         startActivity(proses_cari);

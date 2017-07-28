@@ -135,7 +135,7 @@ public class EditRangkaianActivity extends AppCompatActivity implements View.OnC
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             progressdialog.dismiss();
-                                            startActivity(new Intent(EditRangkaianActivity.this, MainActivity.class));
+                                            startActivity(new Intent(EditRangkaianActivity.this, RangkaianActivity.class));
                                             Toast.makeText(EditRangkaianActivity.this, " Post Edited ", Toast.LENGTH_LONG).show();
                                         }
                                     }
@@ -163,7 +163,7 @@ public class EditRangkaianActivity extends AppCompatActivity implements View.OnC
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     progressdialog.dismiss();
-                                    startActivity(new Intent(EditRangkaianActivity.this, MainActivity.class));
+                                    startActivity(new Intent(EditRangkaianActivity.this, RangkaianActivity.class));
                                     Toast.makeText(EditRangkaianActivity.this, " Post Edited ", Toast.LENGTH_LONG).show();
                                 }
                             }

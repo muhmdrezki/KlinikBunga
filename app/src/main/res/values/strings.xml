@@ -7,4 +7,9 @@
         <item> Tanda Terima Kasih </item>
         <item> Berduka </item>
     </string-array>
+
+    <string-array name="search_kategori">
+        <item> Bunga </item>
+        <item> Rangkaian Bunga </item>
+    </string-array>
 </resources>

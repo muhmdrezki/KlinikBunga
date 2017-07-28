@@ -18,8 +18,17 @@
         android:textSize="20dp"
         />
 
+    <Spinner
+        android:id="@+id/sp_search_kategori"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:entries="@array/search_kategori"
+        />
+
     <TextView
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="70dp"
         android:fontFamily="sans-serif-light"
         android:layout_width="wrap_content"

@@ -151,6 +151,8 @@ public class SinglePostActivity_Rangkaian extends AppCompatActivity implements V
 
         } else if ( item.getItemId() == R.id.main_menu ){
             startActivity(new Intent(SinglePostActivity_Rangkaian.this, MainMenu.class));
+        } else if (item.getItemId() == R.id.ListBunga ) {
+            startActivity(new Intent(SinglePostActivity_Rangkaian.this, RangkaianActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -171,6 +173,7 @@ public class SinglePostActivity_Rangkaian extends AppCompatActivity implements V
             startActivity(EditPostIntent);
         }
     }
+
 
 
 }

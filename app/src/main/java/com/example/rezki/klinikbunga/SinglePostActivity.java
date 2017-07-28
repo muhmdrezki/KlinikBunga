@@ -146,7 +146,7 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
 
         if(item.getItemId()== R.id.action_add ){
 
-            startActivity(new Intent(SinglePostActivity.this,Post_RangkaianActivity.class));
+            startActivity(new Intent(SinglePostActivity.this,PostActivity.class));
 
         } else if ( item.getItemId() == R.id.logout){
 
@@ -154,6 +154,8 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
 
         } else if ( item.getItemId() == R.id.main_menu ){
             startActivity(new Intent(SinglePostActivity.this, MainMenu.class));
+        } else if (item.getItemId() == R.id.ListBunga ) {
+            startActivity(new Intent(SinglePostActivity.this, MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -174,6 +176,8 @@ public class SinglePostActivity extends AppCompatActivity implements View.OnClic
             startActivity(EditPostIntent);
         }
     }
+
+
 
 
 }
