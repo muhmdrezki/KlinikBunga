@@ -202,4 +202,9 @@ public class Hadiah3Activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Hadiah3Activity.this, MainMenu_2_Activity.class));
+    }
+
 }

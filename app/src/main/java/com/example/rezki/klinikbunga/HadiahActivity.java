@@ -202,4 +202,10 @@ public class HadiahActivity extends AppCompatActivity {
             Picasso.with(ctx).load(image).into(postimage);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(HadiahActivity.this, MainMenu_2_Activity.class));
+    }
 }
+
